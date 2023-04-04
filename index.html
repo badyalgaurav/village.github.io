@@ -73,7 +73,7 @@
     <link href="contents/assets/css/style.css" rel="stylesheet">
     <link href="contents/assets/css/customStyle.css" rel="stylesheet" />
     <!-- =======================================================
-    * Template Name: Village 
+    * Template Name: Village
     * Updated: Mar 10 2023 with Bootstrap v5.2.3
     * Template URL: https://bootstrapmade.com/Village -free-restaurant-bootstrap-theme/
     * Author: BootstrapMade.com
@@ -327,11 +327,11 @@
 
 
                         <!--<div class="menu-content">
-            <a href="#">Lobster Bisque</a><span>$5.95</span>
-        </div>
-        <div class="menu-ingredients">
-            Lorem, deren, trataro, filede, nerada
-        </div>-->
+                            <a href="#">Lobster Bisque</a><span>$5.95</span>
+                        </div>
+                        <div class="menu-ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                        </div>-->
                     </div>
 
                     <div class="col-lg-12 menu-item filter-starter">
@@ -343,11 +343,11 @@
                         </div>
 
                         <!--<div class="menu-content">
-            <a href="#">Bread barrel</a><span>$6.95</span>
-        </div>
-        <div class="menu-ingredients">
-            Lorem, deren, trataro, filede, nerada
-        </div>-->
+                            <a href="#">Bread barrel</a><span>$6.95</span>
+                        </div>
+                        <div class="menu-ingredients">
+                            Lorem, deren, trataro, filede, nerada
+                        </div>-->
                     </div>
 
                     <div class="col-lg-12 menu-item filter-specialty">
@@ -359,11 +359,11 @@
                         </div>
 
                         <!--<div class="menu-content">
-            <a href="#">Crab Cake</a><span>$7.95</span>
-        </div>
-        <div class="menu-ingredients">
-            A delicate crab cake served on a toasted roll with lettuce and tartar sauce
-        </div>-->
+                            <a href="#">Crab Cake</a><span>$7.95</span>
+                        </div>
+                        <div class="menu-ingredients">
+                            A delicate crab cake served on a toasted roll with lettuce and tartar sauce
+                        </div>-->
                     </div>
 
                     <div class="col-lg-12 menu-item filter-tandori">
@@ -436,7 +436,7 @@
                             <div class="tab-pane active show" id="tab-1">
                                 <div class="row">
                                     <div class="col-lg-8 details order-2 order-lg-1">
-                                       
+
                                         <p>
                                             At our restaurant, we understand the importance of a wedding day, and we take pride in providing exceptional service to make your special day truly unforgettable. Our experienced staff will work closely with you to ensure that every detail is perfect, from the decor and menu to the service and overall ambiance.
 
@@ -608,7 +608,7 @@
                     <p>We would be delighted to reserve a table for you. Please let us know the date, time and number of guests you have in mind, and we'll be happy to accommodate your reques.</p>
                 </div>
 
-                <form action="forms/book-a-table.php" method="post" role="form" class="php-email-form">
+                <div class="php-email-form">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 form-group">
                             <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
@@ -636,7 +636,7 @@
                         </div>
                     </div>
                     <div class="form-group mt-3">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
+                        <textarea class="form-control" id="txtMessage" name="message" rows="5" placeholder="Message"></textarea>
                         <div class="validate"></div>
                     </div>
                     <div class="mb-3">
@@ -644,8 +644,8 @@
                         <div class="error-message"></div>
                         <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
                     </div>
-                    <div class="text-center"><button type="submit">Send Message</button></div>
-                </form>
+                    <div class="text-center"><button class="btn btn-primary" onclick="btnSendMessage();">Send Message</button></div>
+                </div>
 
             </div>
         </section><!-- End Book A Table Section -->
@@ -991,6 +991,41 @@
 
     <!-- Template Main JS File -->
     <script src="contents/assets/js/main.js"></script>
+    <!-- Email sender -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+
+
+        const btnSendMessage = () => {
+            debugger;
+            const name = document.querySelector('input[name="name"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+            const phone = document.querySelector('input[name="phone"]').value;
+            const date = document.querySelector('input[name="date"]').value;
+            const time = document.querySelector('input[name="time"]').value;
+            const people = document.querySelector('input[name="people"]').value;
+            const message = document.querySelector('#txtMessage').value;
+
+            
+            Email.send({
+                Host: "smtp.elasticemail.com",
+                Username: atob("YmFkeWFsZ2F1cmF2MUBnbWFpbC5jb20="),//"badyalgaurav1@gmail.com",
+                Password: atob('NTg3OTAwOTZCMzA2QTg4QjFDMkQ5RkIwMDRDQjdCNTc0RUVC'),//"58790096B306A88B1C2D9FB004CB7B574EEB",
+                To: email,
+                From: "badyalgaurav1@gmail.com",
+                Subject: `table book order from ${name}`,
+                Body: `Booking request from ${name},
+                            email=${email},
+                            mobile=${phone},
+                            date=${date},
+                            time=${time},
+                            number of people=${people},
+                            message=${message}`
+            }).then(
+                alert("successfully send the information, we will reach to you by email or phone number soon")
+            );
+        }
+    </script>
 
 </body>
 
